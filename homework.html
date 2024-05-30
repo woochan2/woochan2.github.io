@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>놀이공원 입장료 계산기</title>
+</head>
+<body>
+    <h1>현재 날짜와 시간</h1>
+    <p id="datetime"></p>
+    <h2>놀이공원 입장료 계산기</h2>
+    <label for="age">나이:</label>
+    <input type="number" id="age" value="0">
+    <button onclick="calculateFee()">입장료 계산</button>
+    <p id="fee"></p>
+
+    <script>
+        // 실시간 날짜와 시간을 업데이트하는 함수
+        function updateDateTime() {
+            const now = new Date();
+            const dateTimeString = now.toLocaleString(); // 로컬 날짜와 시간 포맷
+            document.getElementById('datetime').innerText = dateTimeString;
+        }
+
+        // 페이지가 로드될 때 마다 실시간 날짜와 시간을 업데이트
+        setInterval(updateDateTime, 1000); // 1초마다 업데이트
+
+        // 놀이공원 입장료를 계산하는 함수
+        function calculateFee() {
+            const age = document.getElementById('age').value;
+            let fee = 0;
+
+            if(age < 0) {
+                alert("나이는 0보다 작을 수 없습니다!");
+                return;
+            }
+
+            // 나이에 따른 입장료 계산
+            if(age < 3) {
+                fee = 0; // 3세 미만 무료
+            } else if(age >= 3 && age <= 12) {
+                fee = 20000; // 어린이 요금
+            } else if(age > 65) {
+                fee = 15000; // 노인 요금
+            } else {
+                fee = 30000; // 기본 요금
+            }
+
+            document.getElementById('fee').innerText = `입장료는 ${fee}원입니다.`;
+        }
+    </script>
+</body>
+</html>
